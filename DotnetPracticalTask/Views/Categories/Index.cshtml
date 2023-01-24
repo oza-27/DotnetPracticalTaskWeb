@@ -1,0 +1,38 @@
+﻿@model IEnumerable<DotnetPracticalTask.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary"> Category List </h2>
+        </div>
+        <div class="col-6 text-end">
+            <a class="btn btn-primary" onclick="outputCreate('@Url.Action("Create", "Categories", null, Context.Request.Scheme)', 'Create a New Category')">
+                Create New Category
+            </a>
+        </div>
+    </div>
+<table id="tblData" class="table table-bordered table-striped text-center p-2" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                isActive
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+</table>
+</div>
+
+@section Scripts{
+    <script src="~/js/category.js"></script>
+}

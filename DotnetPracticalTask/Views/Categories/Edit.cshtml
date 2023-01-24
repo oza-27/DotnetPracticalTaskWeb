@@ -1,0 +1,42 @@
+﻿@model DotnetPracticalTask.Models.Category
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = null;
+}
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <input asp-for="CategoryId" hidden />
+        <div class="row pb-2">
+            <h2> Update Category </h2>
+            <hr />
+        </div>
+        
+        <div class="mb-3">
+            <label asp-for="Name"> Name </label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description"> Description </label>
+            <input asp-for="Description" class="form-control" />
+        </div>
+
+        <div class="form-group form-check mb-3">
+            <label class="form-check-label">
+                <input asp-for="IsActive" class="form-check-input" /> @Html.DisplayNameFor(model=>model.IsActive)
+            </label>
+        </div>
+       @* <div>
+            <label asp-for="CategoryId"> Categories Name </label>
+               <select asp-for="CategoryId" asp-items="@ViewBag.CategoryList" class="form-select">
+                   <option disabled selected>-----Select Category-----</option>
+               </select>
+        </div>*@
+        <button type="submit" style="150px" class="btn btn-primary" asp-controller="Categories" asp-action="Edit"> Update </button>
+        <a class="btn btn-primary" asp-controller="Categories" asp-action="Index"> Back to list </a>
+    </div>
+</form>
+
+
