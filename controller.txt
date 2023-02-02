@@ -1,0 +1,53 @@
+using EmployeeManagementSystemExam.Data;
+using EmployeeManagementSystemExam.Models;
+using EmployeeManagementSystemExam.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+
+namespace EmployeeManagementSystemExam.Controllers
+{
+	public class EmployeeController : Controller
+	{
+		private ApplicationDbContext _db;
+		public EmployeeController(ApplicationDbContext db)
+		{
+			_db= db;
+		}
+		public IActionResult Index()
+		{
+			IEnumerable<EmployeeDetails> empList = _db.EmployeesDetail;
+
+            return View(empList);
+		}
+
+		public IActionResult getAll(int id)
+		{
+			EmployeeVM employeeVM = new()
+			{
+				employee = new(),
+				roleList = _db.RoleTypes.Select(i => new SelectListItem
+				{
+					Text = i.Name,
+					Value = i.Id.ToString(),
+				}).ToList()
+			};
+
+			if (id == null || id == 0)
+			{
+				return View(employeeVM);
+			}
+			return View(employeeVM);
+		}
+
+		[HttpPost, ActionName("Upsert")]
+		[ValidateAntiForgeryToken]
+		public IActionResult getAll(EmployeeVM employeeVM)
+		{
+			
+			_db.EmployeesDetail.Add(employeeVM.employee);
+			_db.SaveChanges();
+			return RedirectToAction("Index");
+		}
+	}
+}
